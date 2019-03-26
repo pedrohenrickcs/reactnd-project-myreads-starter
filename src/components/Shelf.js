@@ -3,18 +3,36 @@ import React, { Component } from 'react'
 class Shelf extends Component {
 
     render() {
-        const { shelf } = this.props
+        const shelf = [
+            {
+                type: 'currentlyReading',
+                title: 'Currently Reading'
+            },
+            {
+                type: 'wantToRead',
+                title: 'Want to Read'
+            },
+            {
+                type: 'read',
+                title: 'Read'
+            }
+        ]
+
+        console.log('shelf', shelf);
+        
 
         return (
             <div className="book-shelf-changer">
                 <select>
-                <option value="move" disabled>Move to...</option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
+                    <option value="move" disabled>Move to...</option>
+                    {shelf.map((shelfOption) => ( 
+                        <option key={shelfOption.type} value={shelfOption.type}>{shelfOption.title}</option>
+                    ))}
+                    <option value="none">None</option>
                 </select>
             </div>
         )
     }
 }
+
+export default Shelf;

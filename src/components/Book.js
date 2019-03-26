@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import Shelf from './Shelf';
 
-class Book extends Component {
 
-    
+class Book extends Component {    
+
+    state = {
+        shelf: []
+    }
+
     render() {
-        const { book, shelf } = this.props
-        console.log('book', book);
+        const { book } = this.props
         
         return (
             <ol className="books-grid">
@@ -18,6 +22,8 @@ class Book extends Component {
                                     height: 193,
                                     backgroundImage: `url(${books.imageLinks.thumbnail})`
                                 }} />
+                                <Shelf shelf={this.state.shelf}
+                                />
                             </div>
                         </div>
                     </li>
