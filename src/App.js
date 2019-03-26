@@ -24,9 +24,6 @@ componentDidMount() {
 }
 
 render() {
-	const { books, shelfs } = this.props;
-
-	console.log('boopks', shelfs);	
 
     return (
       <div className="app">
@@ -60,8 +57,8 @@ render() {
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     	<Book 
-							book={books}
-							shelfs={shelfs}
+							book={this.state.books}
+							shelf={this.state.shelf}
 					  	/>
                   </div>
                 </div>
