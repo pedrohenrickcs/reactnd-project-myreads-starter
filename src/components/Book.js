@@ -2,18 +2,20 @@ import React, { Component } from 'react'
 import Shelf from './Shelf';
 
 
-class Book extends Component {    
-
+class Book extends Component {   
+    
     state = {
-        shelf: []
+        book: []
     }
 
     render() {
         const { book } = this.props
+
+        console.log('book2222', book);
         
         return (
             <ol className="books-grid">
-                {book.map((books) => (                    
+                {book.map((books) => (            
                     <li key={books.id}>
                         <div className="book">
                             <div className="book-top">

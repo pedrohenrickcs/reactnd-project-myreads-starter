@@ -1,39 +1,25 @@
 import React, { Component } from 'react'
 
 class Shelf extends Component {
+    
+
+    state = {
+        shelf: []
+    }
 
     render() {
-        const shelf = [
-            {
-                type: 'currentlyReading',
-                title: 'Currently Reading'
-            },
-            {
-                type: 'wantToRead',
-                title: 'Want to Read'
-            },
-            {
-                type: 'read',
-                title: 'Read'
-            }
-        ]
-
-        console.log('shelf', shelf);        
+        
+        console.log('shelf', this.setState.shelf);        
 
         return (
-            <div className="bookshelf">
-                <h2 className="bookshelf-title">Currently Reading</h2>
-                <div className="bookshelf-books">
-                    <div className="book-shelf-changer">
-                        <select>
-                            <option value="move" disabled>Move to...</option>
-                            {shelf.map((shelfOption) => ( 
-                                <option key={shelfOption.type} value={shelfOption.type}>{shelfOption.title}</option>
-                            ))}
-                            <option value="none">None</option>
-                        </select>
-                    </div>
-                </div>
+            <div className="book-shelf-changer">
+                <select>
+                    <option value="move" disabled>Move to...</option>
+                    {this.setState.shelf.map((shelfOption) => ( 
+                        <option key={shelfOption.type} value={shelfOption.type}>{shelfOption.title}</option>
+                    ))}
+                    <option value="none">None</option>
+                </select>
             </div>
         )
     }
