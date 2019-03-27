@@ -18,18 +18,22 @@ class Shelf extends Component {
             }
         ]
 
-        console.log('shelf', shelf);
-        
+        console.log('shelf', shelf);        
 
         return (
-            <div className="book-shelf-changer">
-                <select>
-                    <option value="move" disabled>Move to...</option>
-                    {shelf.map((shelfOption) => ( 
-                        <option key={shelfOption.type} value={shelfOption.type}>{shelfOption.title}</option>
-                    ))}
-                    <option value="none">None</option>
-                </select>
+            <div className="bookshelf">
+                <h2 className="bookshelf-title">Currently Reading</h2>
+                <div className="bookshelf-books">
+                    <div className="book-shelf-changer">
+                        <select>
+                            <option value="move" disabled>Move to...</option>
+                            {shelf.map((shelfOption) => ( 
+                                <option key={shelfOption.type} value={shelfOption.type}>{shelfOption.title}</option>
+                            ))}
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         )
     }

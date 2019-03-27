@@ -52,15 +52,10 @@ render() {
 			<Header title="MyReads" />
             <div className="list-books-content">
               <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-						<Book 
-							book={this.state.books}
-							shelf={this.state.shelf}
-						/>
-                  </div>
-                </div>
+					<Book 
+						book={this.state.books}
+						shelf={this.state.shelf}
+					/>
               </div>
             </div>
             <div className="open-search">
