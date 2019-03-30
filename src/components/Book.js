@@ -3,19 +3,13 @@ import Shelf from './Shelf';
 
 class Book extends Component {   
 
-    state = {
-        shelf: []
-    }
-
     render() {
 
-        const {book, shelf} = this.props
-
-        console.log('SHELF', shelf);
+        const {book, shelf, move} = this.props
         
         return (
             <ol className="books-grid">
-                {book.map((books) => (         
+                {book.map((books) => (   
                     <li key={books.id}>
                         <div className="book">
                             <div className="book-top">
@@ -26,6 +20,7 @@ class Book extends Component {
                                 }} />
                                 <Shelf shelf={shelf}
                                         book={book}
+                                        move={move}
                                 />
                             </div>
                         </div>

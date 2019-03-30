@@ -1,9 +1,9 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Header from './components/Header';
 import BookGrid from './components/BookGrid';
-import Book from './components/Book';
+import Search from './components/Search';
+import Header from './components/Header';
 
 class BooksApp extends React.Component {
   state = {
@@ -15,8 +15,37 @@ class BooksApp extends React.Component {
      */
 	showSearchPage: false,
 	books: [],
-	shelf: []
+	shelf: [{
+			type: 'currentlyReading',
+			title: 'Currently Reading'
+		},
+		{
+			type: 'wantToRead',
+			title: 'Want to Read'
+		},
+		{
+			type: 'read',
+			title: 'Read'
+		}
+	]
+
 }  
+
+moveBooks = () => {
+	const newState = this.state
+	console.log('book 🤑', newState.book);
+	console.log('shelf ⚡', newState.shelf.title);
+
+	if (newState.shelf === newState.book) {
+		console.log('é igual');		
+	}	
+
+	this.setState(state => {
+		console.log('dslkafmsdçf', state);
+		
+	})
+}
+
 
 componentDidMount() {
 	BooksAPI.getAll().then((books) => {
@@ -26,31 +55,13 @@ componentDidMount() {
 
 render() {
 
-	const { shelf, books } = this.props
+	const { shelfs } = this.state
 
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
-              <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-                <input type="text" placeholder="Search by title or author"/>
-
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
+			<Search shelf={shelfs}
+			/>
         ) : (
           <div className="list-books">
 			<Header title="MyReads" />
@@ -58,6 +69,7 @@ render() {
 				<BookGrid 
 					shelf={this.state.shelf}
 					book={this.state.books}
+					move={this.moveBooks}
 				/>
             </div>
             <div className="open-search">

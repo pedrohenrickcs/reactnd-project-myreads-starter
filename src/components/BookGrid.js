@@ -2,30 +2,13 @@ import React, { Component } from 'react'
 import Book from './Book';
 
 class BookGrid extends Component {
-
-    state = {
-        books: []
-    }
     
     render() {
-        const shelf = [
-            {
-                type: 'currentlyReading',
-                title: 'Currently Reading'
-            },
-            {
-                type: 'wantToRead',
-                title: 'Want to Read'
-            },
-            {
-                type: 'read',
-                title: 'Read'
-            }
-        ]
 
-        const { book } = this.props
+        const { book, shelf } = this.props
 
-        console.log('BOOK', book);        
+        console.log('BOOK', book);      
+        console.log('SHELF', shelf);
 
         return (
             <div>
@@ -36,6 +19,7 @@ class BookGrid extends Component {
                             <Book
                                 book={book}
                                 shelf={shelf}
+                                move={this.props.move}
                             />
                         </div>
                     </div>
