@@ -15,6 +15,7 @@ class BooksApp extends React.Component {
      */
 	showSearchPage: false,
 	books: [],
+	searchBook: [],
 	shelf: [{
 			type: 'currentlyReading',
 			title: 'Currently Reading'
@@ -40,10 +41,16 @@ moveBooks = () => {
 		console.log('é igual');		
 	}	
 
-	this.setState(state => {
-		console.log('dslkafmsdçf', state);
-		
-	})
+	this.setState(state => ({
+
+		searchBook: state.searchBook.map(book => {
+			const chosen = state.books.find(cBook => cBook.id === book.id);
+				console.log('STATE 1', chosen);
+				console.log('STATE 2', book);
+
+				return book
+		})
+	}))
 }
 
 
