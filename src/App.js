@@ -40,8 +40,7 @@ moveBooks = (book, shelf) => {
 	console.log('book 🤑', book);
 	console.log('shelf ⚡', shelf);
 
-	this.setState(state => ({		
-
+	this.setState(state => ({
 		searchBook: state.searchBook.map(book => {
 			const chosen = state.books.find(cBook => cBook.id === book.id);
 				console.log('STATE 1', chosen);
