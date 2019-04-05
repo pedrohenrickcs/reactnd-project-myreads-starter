@@ -32,16 +32,15 @@ class BooksApp extends React.Component {
 
 }  
 
-moveBooks = () => {
+moveBooks = (book, shelf) => {
 	const newState = this.state
-	console.log('book 🤑', newState.book);
-	console.log('shelf ⚡', newState.shelf.title);
+	
+	console.log('newState', newState);
+	
+	console.log('book 🤑', book);
+	console.log('shelf ⚡', shelf);
 
-	if (newState.shelf === newState.book) {
-		console.log('é igual');		
-	}	
-
-	this.setState(state => ({
+	this.setState(state => ({		
 
 		searchBook: state.searchBook.map(book => {
 			const chosen = state.books.find(cBook => cBook.id === book.id);
@@ -51,6 +50,13 @@ moveBooks = () => {
 				return book
 		})
 	}))
+
+	BooksAPI.update(book, shelf).then(res => {
+		console.log('res', res);
+		console.log('set', this.state);
+		
+		
+	});
 }
 
 
