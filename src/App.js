@@ -40,21 +40,27 @@ moveBooks = (book, shelf) => {
 	console.log('book 🤑', book);
 	console.log('shelf ⚡', shelf);
 
-	this.setState(state => ({
-		searchBook: state.searchBook.map(book => {
-			const chosen = state.books.find(cBook => cBook.id === book.id);
-				console.log('STATE 1', chosen);
-				console.log('STATE 2', book);
+	const filterBook = c => {
+		console.log('c', c);
+		
+		return c;
+	}
 
-				return book
-		})
-	}))
+	this.setState(state => {
+		const hasBook = state.books.some(currentBook => currentBook.id === book.id);
+
+		console.log('has', hasBook);
+
+		// if (!hasBook) {
+			
+		// }
+	})
+
+	this.setState(state => ({ searchBook: state.searchBook.filter( filterBook ) }))
 
 	BooksAPI.update(book, shelf).then(res => {
 		console.log('res', res);
 		console.log('set', this.state);
-		
-		
 	});
 }
 
