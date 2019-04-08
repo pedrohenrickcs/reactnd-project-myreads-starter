@@ -33,35 +33,34 @@ class BooksApp extends React.Component {
 }  
 
 moveBooks = (book, shelf) => {
-	const newState = this.state
-	
-	console.log('newState', newState);
-	
-	console.log('book 🤑', book);
-	console.log('shelf ⚡', shelf);
 
 	const filterBook = c => {
-		console.log('c', c);
+		console.log('c', c.id);
+		console.log('BOOK ID', book.id);
+		console.log('SHELF ID', c.shelf);
+		console.log('SHELF', shelf);
+
+		if (c.id === book.id && c.shelf !== shelf) {
+			c.shelf = shelf;
+		}
 		
 		return c;
 	}
 
 	this.setState(state => {
-		const hasBook = state.books.some(currentBook => currentBook.id === book.id);
+		// const hasBook = state.books.some(currentBook => currentBook.id === book.id);
 
-		console.log('has', hasBook);
+		state.books.filter(filterBook);
 
-		// if (!hasBook) {
-			
-		// }
+		this.setState(state => ({ searchBook: state.searchBook.filter( filterBook ) }))
+
+		BooksAPI.update(book, shelf);
 	})
+}
 
-	this.setState(state => ({ searchBook: state.searchBook.filter( filterBook ) }))
-
-	BooksAPI.update(book, shelf).then(res => {
-		console.log('res', res);
-		console.log('set', this.state);
-	});
+searchBook = q => {
+	console.log('query', q);
+	
 }
 
 componentDidMount() {
@@ -78,6 +77,7 @@ render() {
       <div className="app">
         {this.state.showSearchPage ? (
 			<Search shelf={shelfs}
+					shelfSearchBook={this.searchBook}
 			/>
         ) : (
           <div className="list-books">
