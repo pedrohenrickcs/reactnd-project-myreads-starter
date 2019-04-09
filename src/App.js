@@ -4,6 +4,7 @@ import './App.css'
 import BookGrid from './components/BookGrid';
 import Search from './components/Search';
 import Header from './components/Header';
+import { BrowserRouter  as Router, Route, Link } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -32,26 +33,20 @@ class BooksApp extends React.Component {
 
 }  
 
-moveBooks = (book, shelf) => {
+moveBooks = (book, shelf) => {	
 
 	const filterBook = c => {
 
-		if (c.id === book.id && c.shelf !== shelf) {
-			c.shelf = shelf;
-		}
+		if (c.id === book.id && c.shelf !== shelf) c.shelf = shelf;		
 		
 		return c;
 	}
 
-	this.setState(state => {
-		// const hasBook = state.books.some(currentBook => currentBook.id === book.id);
+	this.setState(state => { state.books.filter(filterBook); })
+	
+	this.setState(state => ({ searchBook: state.searchBook.filter( filterBook ) }))
 
-		state.books.filter(filterBook);
-
-		this.setState(state => ({ searchBook: state.searchBook.filter( filterBook ) }))
-
-		BooksAPI.update(book, shelf);
-	})
+	BooksAPI.update(book, shelf);
 }
 
 componentDidMount() {
@@ -63,27 +58,29 @@ componentDidMount() {
 render() {
 
     return (
-      <div className="app">
-        {this.state.showSearchPage ? (
-			<Search shelf={this.state.shelf}
-					books={this.state.books}
-					move={this.moveBooks}
-			/>
-        ) : (
-          <div className="list-books">
-			<Header title="MyReads" />
-            <div className="list-books-content">
-				<BookGrid 
-					shelf={this.state.shelf}
-					book={this.state.books}
-					move={this.moveBooks}
-				/>
-            </div>
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-            </div>
-          </div>
-        )}
+      	<div className="app">
+		  <Router>
+				<Route path="/search" render={() => (
+					<Search shelf={this.state.shelf}
+							books={this.state.books}
+							move={this.moveBooks}
+					/>
+				)}/>
+
+				<Route exact path="/" render={() => (
+					<div className="list-books">
+						<Header title="MyReads" />
+							<BookGrid 
+								shelf={this.state.shelf}
+								book={this.state.books}
+								move={this.moveBooks}
+								/>
+						<Link className="open-search" to="/search">
+							<button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+						</Link>
+					</div>
+				)}/>
+			</Router>
       </div>
     )
   }

@@ -8,7 +8,8 @@ class BookGrid extends Component {
         const { book, shelf } = this.props
 
         return (
-            <div>
+            <div className="list-books-content">
+                <div>
                 {shelf.map((boxShelf) => (
                     <div className="bookshelf" key={boxShelf.type}>
                     <h2 className="bookshelf-title">{boxShelf.title}</h2>
@@ -19,17 +20,18 @@ class BookGrid extends Component {
                                         <div className="bookshelf-books">
                                             <Book
                                                 book={newBooks}
-                                                shelf={shelf}
                                                 move={this.props.move}
+                                                shelf={shelf}
+                                                shelfValue={newBooks.shelf}
                                             />
                                         </div>
                                     </li>
                                 ))
                             }
-
                         </ol>
                     </div>
                 ))}
+                </div>
             </div>
         )
     }

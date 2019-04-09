@@ -9,11 +9,11 @@ class Book extends Component {
 
         const shelfTotal = shelfValue !== undefined ? shelfValue : 'none';
         
-        const image = book.imageLinks && book.imageLinks.thumbnail === undefined ? '' : book.imageLinks.thumbnail; 
+        const image = book.imageLinks === undefined ? '' : book.imageLinks.thumbnail; 
         
         return (
             <div className="book">
-            <div className="book-top">
+                <div className="book-top">
                     <div className="book-cover" style={{ 
                         width: 128,
                         height: 193,
@@ -25,6 +25,8 @@ class Book extends Component {
                             shelfTotal={shelfTotal}
                     />
                 </div>
+                <div className="book-title">{book.title ? book.title : 'No title'}</div>
+                <div className="book-authors">{book.authors ? book.authors.join(', ') : 'No authors'}</div>
             </div>
         )
     }
