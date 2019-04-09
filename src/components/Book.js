@@ -5,7 +5,11 @@ class Book extends Component {
 
     render() {
 
-        const {book, shelf, move} = this.props        
+        const {book, shelf, move, shelfValue} = this.props      
+
+        const shelfTotal = shelfValue !== undefined ? shelfValue : 'none';
+        
+        const image = book.imageLinks && book.imageLinks.thumbnail === undefined ? '' : book.imageLinks.thumbnail; 
         
         return (
             <div className="book">
@@ -13,11 +17,12 @@ class Book extends Component {
                     <div className="book-cover" style={{ 
                         width: 128,
                         height: 193,
-                        backgroundImage: `url(${book.imageLinks.thumbnail})`
+                        backgroundImage: `url(${image})`
                     }} />
                     <Shelf shelf={shelf}
                             book={book}
                             move={move}
+                            shelfTotal={shelfTotal}
                     />
                 </div>
             </div>

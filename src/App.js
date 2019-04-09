@@ -35,10 +35,6 @@ class BooksApp extends React.Component {
 moveBooks = (book, shelf) => {
 
 	const filterBook = c => {
-		console.log('c', c.id);
-		console.log('BOOK ID', book.id);
-		console.log('SHELF ID', c.shelf);
-		console.log('SHELF', shelf);
 
 		if (c.id === book.id && c.shelf !== shelf) {
 			c.shelf = shelf;
@@ -58,11 +54,6 @@ moveBooks = (book, shelf) => {
 	})
 }
 
-searchBook = q => {
-	console.log('query', q);
-	
-}
-
 componentDidMount() {
 	BooksAPI.getAll().then((books) => {
 		this.setState({ books });
@@ -71,13 +62,12 @@ componentDidMount() {
 
 render() {
 
-	const { shelfs } = this.state
-
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-			<Search shelf={shelfs}
-					shelfSearchBook={this.searchBook}
+			<Search shelf={this.state.shelf}
+					books={this.state.books}
+					move={this.moveBooks}
 			/>
         ) : (
           <div className="list-books">
