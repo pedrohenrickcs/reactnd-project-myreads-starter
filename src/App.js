@@ -44,14 +44,10 @@ moveBooks = (book, shelf) => {
 
 	this.setState(state => { 
 
-		const hasBook = state.books.some(currentBook => currentBook.id === book.id);
-
-		console.log('STATE', state.books);
-		
+		const hasBook = state.books.some(currentBook => currentBook.id === book.id);		
 
 		if (!hasBook) {
 			book.shelf = shelf;
-			console.log('HSELFD', shelf);
 			return state.books.concat(book)
 		} else {
 			return state.books.filter(filterBook); 

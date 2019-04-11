@@ -7,6 +7,9 @@ class BookGrid extends Component {
 
         const { book, shelf } = this.props
 
+        console.log('com props', this.props.move);
+        
+
         return (
             <div className="list-books-content">
                 <div>

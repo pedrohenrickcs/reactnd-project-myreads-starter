@@ -33,7 +33,6 @@ class SearchPage extends Component {
             BooksAPI.search(this.state.query)
             .then(this.resultBooks)
             .then(data => {
-                console.log('ERROR', data.error);
 
                 if (data.error) this.setState({ books:[] })
                 
@@ -49,7 +48,7 @@ class SearchPage extends Component {
 
     render() {
 
-        const { shelf, move } = this.props;
+        const { shelf, move } = this.props;       
 
         return (
             <div className="search-books">
