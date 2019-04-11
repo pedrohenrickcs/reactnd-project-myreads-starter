@@ -2,8 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookGrid from './components/BookGrid';
-import Search from './components/Search';
-import Header from './components/Header';
+import SearchPage from './components/SearchPage';
 import { BrowserRouter  as Router, Route, Link } from 'react-router-dom'
 
 class BooksApp extends React.Component {
@@ -17,6 +16,7 @@ class BooksApp extends React.Component {
 	showSearchPage: false,
 	books: [],
 	searchBook: [],
+	title: '',
 	shelf: [{
 			type: 'currentlyReading',
 			title: 'Currently Reading'
@@ -42,7 +42,23 @@ moveBooks = (book, shelf) => {
 		return c;
 	}
 
-	this.setState(state => { state.books.filter(filterBook); })
+	this.setState(state => { 
+
+		const hasBook = state.books.some(currentBook => currentBook.id === book.id);
+
+		console.log('STATE', state.books);
+		
+
+		if (!hasBook) {
+			book.shelf = shelf;
+			console.log('HSELFD', shelf);
+			return state.books.concat(book)
+		} else {
+			return state.books.filter(filterBook); 
+		}
+		
+		
+	})
 	
 	this.setState(state => ({ searchBook: state.searchBook.filter( filterBook ) }))
 
@@ -61,7 +77,8 @@ render() {
       	<div className="app">
 		  <Router>
 				<Route path="/search" render={() => (
-					<Search shelf={this.state.shelf}
+					<SearchPage 
+							shelf={this.state.shelf}
 							books={this.state.books}
 							move={this.moveBooks}
 					/>
@@ -69,12 +86,14 @@ render() {
 
 				<Route exact path="/" render={() => (
 					<div className="list-books">
-						<Header title="MyReads" />
-							<BookGrid 
-								shelf={this.state.shelf}
-								book={this.state.books}
-								move={this.moveBooks}
-								/>
+					<div className="list-books-title">
+						<h1>MyReads</h1>
+					</div>
+						<BookGrid 
+							shelf={this.state.shelf}
+							book={this.state.books}
+							move={this.moveBooks}
+							/>
 						<Link className="open-search" to="/search">
 							<button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
 						</Link>

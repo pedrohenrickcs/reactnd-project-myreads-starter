@@ -33,9 +33,12 @@ class SearchPage extends Component {
             BooksAPI.search(this.state.query)
             .then(this.resultBooks)
             .then(data => {
-                if (data !== undefined) {
-                    this.setState({ books: data })
-                }
+                console.log('ERROR', data.error);
+
+                if (data.error) this.setState({ books:[] })
+                
+                if (data !== undefined) this.setState({ books: data })
+                
             }).catch(e => {
                 this.setState({ books: [] })
 
