@@ -58,7 +58,18 @@ moveBooks = (book, shelf) => {
 	
 	this.setState(state => ({ searchBook: state.searchBook.filter( filterBook ) }))
 
-	BooksAPI.update(book, shelf);
+	
+	BooksAPI.update(book, shelf)
+		.then(() => {
+			this.getAllBooks();
+		});
+	
+}
+
+getAllBooks() {
+	BooksAPI.getAll().then((books) => {
+		this.setState({ books })
+	})
 }
 
 componentDidMount() {
